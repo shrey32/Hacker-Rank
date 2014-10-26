@@ -1,6 +1,9 @@
 package com.hackerrank.arraysorting;
 
+import java.math.BigInteger;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**Sherlock is given an array of N integers A0, A1 ... AN-1 by Watson. Now Watson asks Sherlock that how many different pairs of indices i and j exist such that i is not equal to j but Ai is equal to Aj.
@@ -52,18 +55,35 @@ public class SherlockAndPairs {
 				array[j] = scan.nextInt();
 			}
 			Arrays.sort(array);
-			System.out.println(getPairs(array));
+			System.out.println(solve(array));
 		}
 		scan.close();
 	}
 
-	public static int getPairs(int[] array) {
-		int pairs = 0;
-		for (int i = 0; i < array.length; i++) {
-			for (int j = 0; j < array.length; j++) {
 
-			}
-		}
-		return pairs;
-	}
+	 private static final BigInteger TWO = BigInteger.valueOf(2);
+
+	    private static BigInteger solve(int[] in) {
+	        Map<BigInteger, BigInteger> map = new HashMap<BigInteger, BigInteger>();
+	        for (int i = 0; i < in.length; i++) {
+	            BigInteger item = BigInteger.valueOf(in[i]);
+	            if (map.containsKey(item)) {
+	                map.put(item, map.get(item).add(BigInteger.ONE));
+	            } else {
+	                map.put(item, BigInteger.ONE);
+	            }
+	        }
+
+	        BigInteger tot = BigInteger.ZERO;
+	        for (Map.Entry<BigInteger, BigInteger> e : map.entrySet()) {
+	            BigInteger freq = e.getValue();
+	            if (TWO.equals(freq)) {
+	                tot = tot.add(BigInteger.valueOf(2));
+	            } else if (freq.compareTo(TWO) > 0) {
+	                BigInteger res = freq.multiply((freq.subtract(BigInteger.ONE)));
+	                tot = tot.add(res);
+	            }
+	        }
+	        return tot;
+	    }
 }
