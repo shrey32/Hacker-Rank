@@ -20,18 +20,15 @@ public class CutTheSticks {
 				min = args[i];
 			}
 		}
-
 		return min;
 	}
 
 	public static void getCutsPerRow(int[] args) {
-
 		int min = 1;
 		while (true) {
 			if (onlyZeros(args)) {
 				break;
 			}
-
 			int cut = 0;
 			min = (getMin(args));
 			for (int i = 0; i < args.length; i++) {
@@ -40,10 +37,8 @@ public class CutTheSticks {
 					cut++;
 				}
 			}
-
 			System.out.println(cut);
 		}
-
 	}
 
 	private static boolean onlyZeros(int[] in) {
@@ -59,9 +54,7 @@ public class CutTheSticks {
 		int N = scan.nextInt();
 		int[] arr = new int[N];
 		for (int i = 0; i < N; i++) {
-
 			arr[i] = scan.nextInt();
-
 		}
 		return arr;
 	}
