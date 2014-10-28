@@ -57,28 +57,44 @@ public class SherlockAndWatson {
 			array[i] = scan.nextInt();
 		}
 		/** Right Circular Rotation */
-
-		int a = 0;
-		while (a < K) {
-			for (int i = 0; i < array.length; i++) {
-				
-			}
-			a++;
-		}
-
-		for (int i = 0; i < Q; i++) {
-			System.out.print(array[i] + ",");
-		}
-
+		array = rightCircularRotation(array, K);
+		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < Q; i++) {
 			int x = scan.nextInt();
-			System.out.println(getValueAtX(x, array));
+			sb.append(array[x] + "\n");
 		}
-
+		System.out.print(sb.toString());
 		scan.close();
 	}
 
-	public static int getValueAtX(int x, int[] arr) {
-		return arr[x];
+	public static int[] rightCircularRotation(int[] arr, int rotation) {
+
+		while (rotation > 0) {
+			int initial = 0;
+			for (int i = arr.length - 1; i >= 0; i--) {
+				if (i == arr.length - 1) {
+					initial = arr[i];
+				}
+				if (i - 1 >= 0) {
+					arr[i] = arr[i - 1];
+				} else {
+					arr[0] = initial;
+				}
+			}
+			rotation--;
+		}
+		return arr;
 	}
+
+	/*
+	 * public static int[] rightCircularRotation(int[] arr) {
+	 * 
+	 * int initial = 0; for (int i = 0; i < arr.length; i++) { if (i == 0) {
+	 * initial = arr[i]; } if (i + 1 < arr.length) { arr[i] = arr[i + 1]; } else
+	 * { arr[arr.length - 1] = initial; }
+	 * 
+	 * }
+	 * 
+	 * return arr; }
+	 */
 }
