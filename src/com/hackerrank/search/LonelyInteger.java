@@ -1,6 +1,5 @@
 package com.hackerrank.search;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -69,7 +68,6 @@ public class LonelyInteger {
 			}
 
 		}
-
 		int i = 0;
 		while (true) {
 			if (map.containsKey(i)) {
