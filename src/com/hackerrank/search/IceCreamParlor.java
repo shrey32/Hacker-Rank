@@ -1,7 +1,5 @@
 package com.hackerrank.search;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**Sunny and Johnny together have M dollars and want to spend the amount at an ice cream parlour. The parlour offers N flavors, and they want to choose 2 flavors so that they end up spending the whole amount.
@@ -53,7 +51,7 @@ public class IceCreamParlor {
 		for (int i = 0; i < T; i++) {
 			int M = scan.nextInt();
 			int N = scan.nextInt();
-			int[] a = new int[N+1];
+			int[] a = new int[N + 1];
 			for (int j = 1; j <= N; j++) {
 				a[j] = scan.nextInt();
 			}
