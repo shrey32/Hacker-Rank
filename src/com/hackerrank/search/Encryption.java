@@ -58,64 +58,36 @@ public class Encryption {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		String s = scan.next();
-		int width = (int) Math.sqrt(1.0 * s.length());
-		int height = (int) Math.ceil(Math.sqrt(s.length()));
-
-		String[] sar = new String[s.length()];
-
-		for (int i = 0; i < sar.length; i++) {
-			Character c = new Character(s.charAt(i));
-			sar[i] = c.toString();
-		}
-
-		int r = 0, c = 0;
-		for (int i = width; i <= height; i++) {
-			for (int j = i + 1; j <= height; j++) {
-				if (i * j == s.length()) {
-					r = i;
-					c = j;
-					break;
-				} else if (i * j >= s.length()) {
-					r = i;
-					c = j;
-				}
-			}
-		}
-		int l = 0, i = 0;
-		int m = c;
-		String[] sr = new String[r];
-
-		while (i < sr.length) {
-			if (m <= s.length()) {
-				String sb = getSt(sar, l, m);
-				sr[i] = sb;
-				i++;
-				l += c;
-				m += c;
-			}
-		}
-
-		for (int p = 0; p <= sr.length; p++) {
-			String sl = "";
-			String s1 = sr[p];
-			if (p < sr.length) {
-				for (int q = 0; q <= s1.length(); q++) {
-					
-					sl += s1.charAt(p);
-				}
-				System.out.print(sl + " ");
-			}
-		}
-
+		String S = scan.next();
 		scan.close();
-	}
+		int length = S.length();
+		int row = (int) Math.floor(Math.sqrt(1.0 * length));
+		int col = (int) Math.ceil(Math.sqrt(1.0 * length));
+		int r = 0;
+		int c = 0;
 
-	public static String getSt(String[] sar, int a, int b) {
-		String s = "";
-		for (int i = a; i < b; i++) {
-			s += sar[i];
+		if (row < col) {
+			int num = col - row;
+			row = row + num;
+			r = row;
+			c = col;
+		} else {
+			r = row;
+			c = col;
 		}
-		return s;
+		String[] s = new String[length];
+		for (int k = 0; k < s.length; k++) {
+			Character ch = new Character(S.charAt(k));
+			s[k] = ch.toString();
+		}
+
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				if (j * c + i < length) {
+					System.out.print(s[j * c + i]);
+				}
+			}
+			System.out.print(" ");
+		}
 	}
 }
