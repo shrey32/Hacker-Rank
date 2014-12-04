@@ -49,7 +49,7 @@ import java.io.InputStreamReader;
  */
 public class AlternatingCharacters {
 	public static void main(String[] args) {
-		try {
+		 try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 					System.in));
 			int T = Integer.parseInt(br.readLine());
