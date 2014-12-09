@@ -56,7 +56,7 @@ public class ConnectingTowns {
 			long noOfChoices = 1;
 			for (int j = 0; j < N - 1; j++) {
 				long a = scan.nextLong();
-				noOfChoices*=a;
+				noOfChoices *= a;
 				noOfChoices = (noOfChoices % 1234567);
 			}
 			System.out.println(noOfChoices);
