@@ -1,4 +1,4 @@
-package src.com.hackerrank.graphtheory;
+package com.hackerrank.graphtheory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
