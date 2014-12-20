@@ -32,7 +32,6 @@ import java.util.Scanner;
 
  Case 1 : The lonely board member shakes no hands, hence 0. 
  Case 2 : There are 2 board members, 1 handshake takes place.*/
-
 /**
  * @author Shrey
  *
