@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigInteger;
 
-
 /**Problem Statement
 
  On the eve of Diwali, Hari is decorating his house with a serial light bulb set. The serial light bulb set has N bulbs placed sequentially on a string which is programmed to change patterns every second. If atleast one bulb in the set is on at any given instant of time, how many different patterns of light can the serial light bulb set produce?
@@ -35,7 +34,6 @@ import java.math.BigInteger;
 
  Case 1: 1 bulb can be lit in only 1 way. 
  Case 2: 2 bulbs can be lit in -*, *-, ** i.e. 3 ways.*/
-
 /**
  * @author Shrey
  *
