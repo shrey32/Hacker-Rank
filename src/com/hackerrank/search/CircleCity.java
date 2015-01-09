@@ -18,67 +18,27 @@ public class CircleCity {
 		for (int i = 0; i < T; i++) {
 			String l = br.readLine();
 			int r = Integer.parseInt(l.split(" ")[0]);
-			int s = Integer.parseInt(l.split(" ")[1]);
-
-			System.out.println(latticePoints(r));
-
-			/*
-			 * if (isPossible(r, s)) { System.out.println("possible"); } else {
-			 * System.out.println("impossible"); }
-			 */
-
+			int k = Integer.parseInt(l.split(" ")[1]);
+			countLatticePoints(r, k);
 		}
 		br.close();
 	}
 
-	private static boolean isPossible(int r, int s) {
-		boolean isPossible = false;
-		int result = 0;
-		int multi = 0;
-		if (r % 5 == 0) {
-			int i = 0;
-			if (r % 5 == 0) {
-				while (r != 1) {
-					if (r % 5 == 0) {
-						r = r / 5;
-						i++;
-					} else {
-						break;
-					}
-				}
-				multi = 8 * i;
-			}
-			result = multi + 4;
-		} else {
-			result = 4;
-		}
-		result = multi + 4;
-		if (s >= result) {
-			isPossible = true;
-		} else {
-			isPossible = false;
-		}
-		return isPossible;
+	private static boolean valid(int x, int radious) {
+		return (Math.pow(x, 2)
+				+ Math.pow((int) (Math.sqrt(radious - Math.pow(x, 2))), 2) == radious);
 	}
 
-	private static int latticePoints(int r) {
-		int result = 0;
-		int multi = 0;
-		int i = 0;
-		if (r % 5 == 0) {
-			while (r != 1) {
-				if (r % 5 == 0) {
-					r = r / 5;
-					i++;
-				} else {
-					break;
-				}
-			}
-			multi = 8 * i;
+	private static void countLatticePoints(int r, int k) {
+		int amount = 0;
+		for (int i = 1; i <= r / i; i++) {
+			if (!valid(i, r))
+				continue;
+			amount += 4;
 		}
-		result = multi + 4;
-		return result;
+		if (amount <= k)
+			System.out.println("possible");
+		else
+			System.out.println("impossible");
 	}
-
-	
 }
