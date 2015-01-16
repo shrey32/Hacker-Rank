@@ -1,6 +1,10 @@
 package com.hackerrank.warmup;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * You are given a list of N people who are attending ACM-ICPC World Finals.
@@ -40,19 +44,42 @@ import java.util.Scanner;
  *
  */
 public class ACM_ICPC {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int N = scan.nextInt();
-		int M = scan.nextInt();
-		String[] ar = new String[N];
-		for (int j = 0; j < N; j++) {
-			StringBuilder sb = new StringBuilder();
-			for (int i = 0; i < M; i++) {
-				sb.append(scan.next());
-			}
-			ar[j] = sb.toString();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String l = br.readLine();
+		int N = Integer.parseInt(l.split(" ")[0]);
+		int M = Integer.parseInt(l.split(" ")[1]);
+		String[] teams = new String[N];
+		for (int i = 0; i < N; i++) {
+			String line = br.readLine();
+			teams[i] = line;
 		}
-		scan.close();
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		int maxTopic = Integer.MIN_VALUE;
+		for (int i = 0; i < N; i++) {
+			String team1 = teams[i];
+			for (int j = i + 1; j < N; j++) {
+				int count = 0;
+				String team2 = teams[j];
+				for (int k = 0; k < M; k++) {
+					String s = String.valueOf(team1.charAt(k));
+					String s2 = String.valueOf(team2.charAt(k));
+					if (s.equals("1") || s2.equals("1")) {
+						count++;
+					}
+				}
+				if (count > maxTopic || count == maxTopic) {
+					maxTopic = count;
+					if (!map.containsKey(maxTopic)) {
+						map.put(maxTopic, 1);
+					} else {
+						map.put(maxTopic, map.get(maxTopic) + 1);
+					}
+				}
+			}
+		}
+		System.out.println(maxTopic);
+		System.out.println(map.get(maxTopic));
+		br.close();
 	}
-
 }
