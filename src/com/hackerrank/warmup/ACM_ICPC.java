@@ -78,7 +78,7 @@ public class ACM_ICPC {
 				}
 			}
 		}
-		System.out.println(maxTopic);
+		 System.out.println(maxTopic);
 		System.out.println(map.get(maxTopic));
 		br.close();
 	}
