@@ -53,9 +53,7 @@ import java.util.Map;
  *
  */
 public class BirthdayGift {
-
 	private static int MAX = Integer.MIN_VALUE;
-
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
