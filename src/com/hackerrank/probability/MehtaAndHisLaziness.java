@@ -3,6 +3,8 @@ package com.hackerrank.probability;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Problem Statement
@@ -50,19 +52,27 @@ import java.io.InputStreamReader;
  *
  */
 public class MehtaAndHisLaziness {
-	private static int MAX = Integer.MIN_VALUE;
 
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int N = Integer.parseInt(br.readLine());
+		Map<Long, String> map = new HashMap<Long, String>();
 		for (int i = 0; i < N; i++) {
 			long l = Long.parseLong(br.readLine());
-			solution(l);
+			if (map.containsKey(l)) {
+				System.out.println(map.get(l));
+			} else {
+				solution(l, map);
+			}
 		}
 	}
 
-	private static void solution(long l) {
+	/**
+	 * 
+	 * @param l
+	 */
+	private static void solution(long l, Map<Long, String> map) {
 		long p = 0;
 		long q = 0;
 		for (int i = 1; i < l; i++) {
@@ -71,28 +81,61 @@ public class MehtaAndHisLaziness {
 				if (i % 2 == 0) {
 					long temp = i;
 					int j = 2;
-					if (lcm(temp, j) == 1) {
+					if (temp > 2 && lcm(temp, j, temp)) {
 						p++;
 					}
 				}
 			}
 		}
 		if (q > 1) {
-			System.out.println(p + "/" + q);
+			if (!map.containsKey(l)) {
+				map.put(l, p + "/" + q);
+				System.out.println(p + "/" + q);
+			}
 		} else {
 			System.out.println("0");
 		}
 	}
 
-	private static long lcm(long temp, int j) {
+	/**
+	 * 
+	 * @param temp
+	 * @param j
+	 * @return
+	 */
+	private static boolean lcm(long temp, int j, long v) {
+		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+		int max = 0;
 		while (temp != 1) {
 			if (temp % j == 0) {
 				temp = temp / j;
+				if (map.containsKey(j)) {
+					map.put(j, map.get(j) + 1);
+				} else {
+					map.put(j, 1);
+				}
+				if (temp <= 1) {
+					max = j;
+					break;
+				}
 			} else {
 				j += 1;
-				lcm(temp, j);
+				lcm(temp, j, v);
 			}
 		}
-		return temp;
+		int i = 1;
+		long val = 1;
+		while (i <= max) {
+			if (map.containsKey(i)) {
+				val *= i;
+			}
+			i++;
+		}
+
+		if (val == Math.sqrt(v)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
