@@ -77,11 +77,10 @@ public class MehtaAndHisLaziness {
 		long q = 0;
 		for (int i = 1; i < l; i++) {
 			if (l % i == 0) {
-				 q++;
+				q++;
 				if (i % 2 == 0) {
 					long temp = i;
-					int j = 2;
-					if (temp > 2 && lcm(temp, j, temp)) {
+					if (temp > 2 && lcm(temp, temp)) {
 						p++;
 					}
 				}
@@ -103,9 +102,10 @@ public class MehtaAndHisLaziness {
 	 * @param j
 	 * @return
 	 */
-	private static boolean lcm(long temp, int j, long v) {
+	private static boolean lcm(long temp, long v) {
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		int max = 0;
+		int max = Integer.MIN_VALUE;
+		int j = 2;
 		while (temp != 1) {
 			if (temp % j == 0) {
 				temp = temp / j;
@@ -114,28 +114,33 @@ public class MehtaAndHisLaziness {
 				} else {
 					map.put(j, 1);
 				}
-				if (temp <= 1) {
+				if (j > max) {
 					max = j;
+				}
+				if (temp <= 1) {
 					break;
 				}
 			} else {
-				j += 1;
-				lcm(temp, j, v);
+				j++;
 			}
 		}
+
 		int i = 1;
 		long val = 1;
 		while (i <= max) {
 			if (map.containsKey(i)) {
-				val *= i;
+				if (map.get(i) % 2 == 0) {
+					int k = i * map.get(i) / 2;
+					val *= k;
+				}
 			}
 			i++;
 		}
-
 		if (val == Math.sqrt(v)) {
 			return true;
 		} else {
 			return false;
 		}
 	}
+
 }
