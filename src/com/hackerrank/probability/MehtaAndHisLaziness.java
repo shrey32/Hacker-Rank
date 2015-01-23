@@ -77,7 +77,7 @@ public class MehtaAndHisLaziness {
 		long q = 0;
 		for (int i = 1; i < l; i++) {
 			if (l % i == 0) {
-				q++;
+				 q++;
 				if (i % 2 == 0) {
 					long temp = i;
 					int j = 2;
