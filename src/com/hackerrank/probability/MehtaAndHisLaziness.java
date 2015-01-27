@@ -75,19 +75,28 @@ public class MehtaAndHisLaziness {
 	private static void solution(long l, Map<Long, String> map) {
 		long p = 0;
 		long q = 0;
-		for (int i = 1; i < l; i++) {
+		for (int i = 1; i <= l / 2; i++) {
 			if (l % i == 0) {
 				q++;
 				if (i % 2 == 0) {
-					long temp = i;
-					if (temp > 2 && lcm(temp, temp)) {
+					int sqrt = (int) Math.sqrt(i);
+					if (i % 2 == 0 && Math.ceil(sqrt) * Math.ceil(sqrt) == i) {
 						p++;
 					}
 				}
 			}
 		}
-		if (q > 1) {
+		if (q > 1 && p != 0) {
 			if (!map.containsKey(l)) {
+				int k = 2;
+				while (p >= k) {
+					if (p % k == 0 && q % k == 0) {
+						p = p / k;
+						q = q / k;
+					} else {
+						k++;
+					}
+				}
 				map.put(l, p + "/" + q);
 				System.out.println(p + "/" + q);
 			}
@@ -95,52 +104,4 @@ public class MehtaAndHisLaziness {
 			System.out.println("0");
 		}
 	}
-
-	/**
-	 * 
-	 * @param temp
-	 * @param j
-	 * @return
-	 */
-	private static boolean lcm(long temp, long v) {
-		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
-		int max = Integer.MIN_VALUE;
-		int j = 2;
-		while (temp != 1) {
-			if (temp % j == 0) {
-				temp = temp / j;
-				if (map.containsKey(j)) {
-					map.put(j, map.get(j) + 1);
-				} else {
-					map.put(j, 1);
-				}
-				if (j > max) {
-					max = j;
-				}
-				if (temp <= 1) {
-					break;
-				}
-			} else {
-				j++;
-			}
-		}
-
-		int i = 1;
-		long val = 1;
-		while (i <= max) {
-			if (map.containsKey(i)) {
-				if (map.get(i) % 2 == 0) {
-					int k = i * map.get(i) / 2;
-					val *= k;
-				}
-			}
-			i++;
-		}
-		if (val == Math.sqrt(v)) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 }
