@@ -86,6 +86,18 @@ public class MehtaAndHisLaziness {
 				}
 			}
 		}
+		printSolution(p, q, l, map);
+	}
+
+	/**
+	 * 
+	 * @param p
+	 * @param q
+	 * @param l
+	 * @param map
+	 */
+	private static void printSolution(long p, long q, long l,
+			Map<Long, String> map) {
 		if (q > 1 && p != 0) {
 			if (!map.containsKey(l)) {
 				int k = 2;
