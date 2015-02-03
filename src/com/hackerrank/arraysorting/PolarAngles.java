@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**A point (x,y), on the cartesian plane, makes an angle theta with the positive direction of the x-axis. Theta varies in the interval [0 ,2PI) radians, i.e, greater than or equal to zero; but less than 2*PI radians.
 
@@ -56,7 +59,7 @@ public class PolarAngles {
 					System.in));
 
 			int N = Integer.parseInt(br.readLine());
-			ArrayList<Model> modelList = new ArrayList<Model>();
+			List<Model> modelList = new ArrayList<Model>();
 			for (int i = 0; i < N; i++) {
 				String s = br.readLine();
 				if (s.contains(" ")) {
@@ -67,18 +70,7 @@ public class PolarAngles {
 					modelList.add(new Model(getAngle(p), p));
 				}
 			}
-
-			for (int i = 0; i < modelList.size(); i++) {
-				for (int j = 0; j < modelList.size(); j++) {
-					if (modelList.get(i).getTheta() < modelList.get(j)
-							.getTheta()) {
-						Model mod = modelList.get(i);
-						modelList.set(i, modelList.get(j));
-						modelList.set(j, mod);
-					}
-				}
-			}
-
+			Collections.sort(modelList);
 			for (int i = 0; i < modelList.size(); i++) {
 				System.out.println(modelList.get(i).getP().getX() + " "
 						+ modelList.get(i).getP().getY());
@@ -113,7 +105,8 @@ public class PolarAngles {
 		}
 	}
 
-	public static class Model {
+	
+	public static class Model implements Comparable<Model>, Comparator<Model> {
 		private double theta;
 		private Point p;
 
@@ -137,19 +130,26 @@ public class PolarAngles {
 		public void setP(Point p) {
 			this.p = p;
 		}
+
+		@Override
+		public int compareTo(Model o) {
+			return ((int) this.theta) - ((int) o.getTheta());
+		}
+
+		@Override
+		public int compare(Model o1, Model o2) {
+			return o1.compareTo(o2);
+		}
 	}
 
+	/**
+	 * 
+	 * @param screenPoint
+	 * @return
+	 */
 	public static double getAngle(Point screenPoint) {
 		double dx = screenPoint.getX();
 		double dy = screenPoint.getY();
-		/* double inRads = Math.atan2(dy, dx); */
-		/*
-		 * if (inRads < 0) inRads = Math.abs(inRads); else inRads = 2 * Math.PI
-		 * - inRads;
-		 * 
-		 * if (Math.toDegrees(inRads) > 270.0) { return 0; } else { return
-		 * Math.toDegrees(inRads); }
-		 */
 		double t = Math.atan2(dy, dx);
 		if (t < 0) {
 			return t + 2 * Math.PI;
