@@ -62,11 +62,7 @@ public class TriangleNumbers {
 		if (ROW % 2 != 0) {
 			System.out.println(2);
 		} else {
-			int count = 3;
-			for (int i = 4; i <= ROW; i++) {
-				count += i - 1;
-			}
-			if (count % 2 == 0) {
+			if ((ROW/2) % 2 == 0) {
 				System.out.println(3);
 			} else {
 				System.out.println(4);
