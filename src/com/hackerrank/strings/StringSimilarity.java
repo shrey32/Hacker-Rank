@@ -59,19 +59,24 @@ public class StringSimilarity {
 	 * @return
 	 */
 	private static int stringSimilarity(String a) {
-		int count = 0;
-		for (int i = 0; i < a.length(); i++) {
-			String s = a.substring(i, a.length());
-			if (i == 0) {
-				count += a.length();
-			} else {
-				int j = 0;
-				while (j < s.length() && a.charAt(j) == s.charAt(j)) {
-					count++;
-					j++;
+		char[] s = a.toCharArray();
+		int i = 1;
+		int n = s.length;
+		int total = s.length;
+		while (i < n) {
+			int sum = 0;
+			int k = 0;
+			while (i + k < n) {
+				if (s[k] == s[i + k]) {
+					sum++;
+				} else {
+					break;
 				}
+				k++;
 			}
+			total += sum;
+			i++;
 		}
-		return count;
+		return total;
 	}
 }
