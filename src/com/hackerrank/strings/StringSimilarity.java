@@ -51,13 +51,6 @@ public class StringSimilarity {
 		br.close();
 	}
 
-	/**
-	 * algorithm is taking quadratic time(O(n^2)), it should run in linear time
-	 * (O(n))
-	 * 
-	 * @param a
-	 * @return
-	 */
 	private static int stringSimilarity(String a) {
 		char[] s = a.toCharArray();
 		int i = 1;
