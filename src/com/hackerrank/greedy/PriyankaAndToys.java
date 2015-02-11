@@ -50,20 +50,16 @@ public class PriyankaAndToys {
 		for (int i = 0; i < N; i++) {
 			toys[i] = Integer.parseInt(ar[i]);
 		}
+		int count = 1;
 		Arrays.sort(toys);
-		priyankaAndToys(toys);
-		br.close();
-	}
-
-	private static void priyankaAndToys(int[] toys) {
-		int count = 0;
-		int min = toys[0];
-		int max = toys[0] + 4;
-		int j = 0;
-		while (min <= toys[j] && toys[j] <= max) {
-			count++;
-			j++;
+		int prev = toys[0];
+		for (int i = 1; i < N; i++) {
+			if (toys[i] - prev > 4) {
+				prev = toys[i];
+				count++;
+			}
 		}
 		System.out.println(count);
+		br.close();
 	}
 }
