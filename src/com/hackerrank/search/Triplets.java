@@ -1,10 +1,9 @@
 package com.hackerrank.search;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * Problem Statement
@@ -45,67 +44,101 @@ import java.util.List;
  */
 public class Triplets {
 
-	public static void main(String[] args) throws NumberFormatException,
-			IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int l = Integer.parseInt(br.readLine());
-		String line = br.readLine();
-		long[] nums = new long[l];
-		String[] numArray = line.split(" ");
-		for (int i = 0; i < numArray.length; i++) {
-			nums[i] = Integer.parseInt(numArray[i]);
-		}
-		List<Triplet> list = new ArrayList<Triplet>();
-		for (int i = 0; i < nums.length; i++) {
-			for (int j = i + 1; j < nums.length; j++) {
-				for (int k = j + 1; k < nums.length; k++) {
-					if (nums[i] < nums[j]
-							&& nums[j] < nums[k]
-							&& !list.contains(new Triplet(nums[i], nums[j],
-									nums[k]))) {
-						list.add(new Triplet(nums[i], nums[j], nums[k]));
-					}
-				}
+	int[] lSmaller, rLarger, treeArray, dscArray, lFlags, rFlags;
+
+	int size, count = 0;
+
+	Triplets(int aSize, int[] inputArray) {
+		size = aSize;
+		lSmaller = new int[size];
+		rLarger = new int[size];
+		dscArray = new int[size];
+		int[] tmpArray = Arrays.copyOf(inputArray, inputArray.length);
+		Arrays.sort(tmpArray);
+		HashMap<Integer, Integer> tmpMap = new HashMap<Integer, Integer>(size);
+		for (int i = 0; i < size; i++) {
+			if (!tmpMap.containsKey(tmpArray[i])) {
+				count++;
+				tmpMap.put(tmpArray[i], count);
 			}
 		}
-		System.out.println(list.size());
+		count++;
+		treeArray = new int[count];
+		lFlags = new int[count];
+		rFlags = new int[count];
+		for (int i = 0; i < size; i++) {
+			dscArray[i] = tmpMap.get(inputArray[i]);
+		}
+
 	}
 
-	public static class Triplet {
-		long a, b, c;
+	void update(int idx) {
+		while (idx < count) {
+			treeArray[idx]++;
 
-		public Triplet(long a, long b, long c) {
-			this.a = a;
-			this.b = b;
-			this.c = c;
+			idx += (idx & -idx);
 		}
+	}
 
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			long result = 1;
-			result = prime * result + a;
-			result = prime * result + b;
-			result = prime * result + c;
-			return (int) result;
+	int read(int index) {
+		int sum = 0;
+		while (index > 0) {
+			sum += treeArray[index];
+			index -= (index & -index);
 		}
+		return sum;
+	}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Triplet other = (Triplet) obj;
-			if (a != other.a)
-				return false;
-			if (b != other.b)
-				return false;
-			if (c != other.c)
-				return false;
-			return true;
+	void countLeftSmaller() {
+		Arrays.fill(treeArray, 0);
+		Arrays.fill(lSmaller, 0);
+		Arrays.fill(lFlags, 0);
+		for (int i = 0; i < size; i++) {
+			int val = dscArray[i];
+			lSmaller[i] = read(val - 1);
+			if (lFlags[val] == 0) {
+				update(val);
+				lFlags[val] = i + 1;
+			} else {
+				lSmaller[i] -= lSmaller[lFlags[val] - 1];
+			}
 		}
+	}
+
+	void countRightLarger() {
+
+		Arrays.fill(treeArray, 0);
+		Arrays.fill(rLarger, 0);
+		Arrays.fill(rFlags, 0);
+		for (int i = size - 1; i >= 0; i--) {
+			int val = dscArray[i];
+			rLarger[i] = read(count - 1) - read(val);
+			if (rFlags[val] == 0) {
+				update(val);
+				rFlags[val] = i + 1;
+			}
+		}
+	}
+
+	long countTriplets() {
+		long sum = 0;
+		for (int i = 0; i < size; i++) {
+			sum += lSmaller[i] * rLarger[i];
+		}
+		return sum;
+	}
+
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		int N = Integer.parseInt(br.readLine());
+		int[] a = new int[N];
+		String[] strs = br.readLine().split(" ");
+		for (int i = 0; i < N; i++)
+			a[i] = Integer.parseInt(strs[i]);
+		Triplets sol = new Triplets(N, a);
+		sol.countLeftSmaller();
+		sol.countRightLarger();
+		System.out.println(sol.countTriplets());
 	}
 }
