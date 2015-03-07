@@ -3,8 +3,6 @@ package com.hackerrank.probability;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Problem Statement
@@ -55,65 +53,38 @@ public class MehtaAndHisLaziness {
 
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {
+		int n = 1000000;
+		int[] divcount = new int[n + 1];
+		int[] evensq = new int[n + 1];
+		boolean[] e = new boolean[n + 1];
+		for (int i = 1; i <= n; i++)
+			for (int j = i; j <= n; j += i)
+				divcount[j]++;
+		for (int i = 2; i * i <= n; i += 2) {
+			e[i * i] = true;
+			for (int j = i * i; j <= n; j += i * i)
+				evensq[j]++;
+		}
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int N = Integer.parseInt(br.readLine());
-		Map<Long, String> map = new HashMap<Long, String>();
-		for (int i = 0; i < N; i++) {
-			long l = Long.parseLong(br.readLine());
-			if (map.containsKey(l)) {
-				System.out.println(map.get(l));
-			} else {
-				solution(l, map);
-			}
+		int T = Integer.parseInt(br.readLine());
+		for (int i = 0; i < T; i++) {
+			int l = Integer.parseInt(br.readLine());
+			int num = evensq[l], den = divcount[l] - 1;
+			if (e[l])
+				num--;
+			int gcd = gcd(num, den);
+			num /= gcd;
+			den /= gcd;
+			if (num == 0)
+				System.out.println(0);
+			else
+				System.out.println(num + "/" + den);
 		}
 	}
 
-	/**
-	 * 
-	 * @param l
-	 */
-	private static void solution(long l, Map<Long, String> map) {
-		long p = 0;
-		long q = 0;
-		for (int i = 1; i <= l / 2; i++) {
-			if (l % i == 0) {
-				q++;
-				if (i % 2 == 0) {
-					int sqrt = (int) Math.sqrt(i);
-					if (i % 2 == 0 && Math.ceil(sqrt) * Math.ceil(sqrt) == i) {
-						p++;
-					}
-				}
-			}
-		}
-		printSolution(p, q, l, map);
-	}
+	public static int gcd(int a, int b) {
+	    return b == 0 ? a : gcd(b, a % b);
+	  }
 
-	/**
-	 * 
-	 * @param p
-	 * @param q
-	 * @param l
-	 * @param map
-	 */
-	private static void printSolution(long p, long q, long l,
-			Map<Long, String> map) {
-		if (q > 1 && p != 0) {
-			if (!map.containsKey(l)) {
-				int k = 2;
-				while (p >= k) {
-					if (p % k == 0 && q % k == 0) {
-						p = p / k;
-						q = q / k;
-					} else {
-						k++;
-					}
-				}
-				map.put(l, p + "/" + q);
-				System.out.println(p + "/" + q);
-			}
-		} else {
-			System.out.println("0");
-		}
-	}
 }
