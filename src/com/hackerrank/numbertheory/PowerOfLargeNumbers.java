@@ -3,7 +3,6 @@ package com.hackerrank.numbertheory;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigInteger;
 
 /**
  * Problem Statement
@@ -60,24 +59,43 @@ import java.math.BigInteger;
  */
 public class PowerOfLargeNumbers {
 
-	public static void main(String[] args) throws NumberFormatException,
-			IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int T = Integer.parseInt(br.readLine());
-		while (T > 0) {
-			String line = br.readLine();
-			String a = line.split(" ")[0];
-			String b = line.split(" ")[1];
-			pow(a, b);
-			T--;
-		}
-		br.close();
-	}
-
-	private static void pow(String a, String b) {
-		long numa = Long.parseLong(a);
-		long numb = Long.parseLong(b);
-		numa = (long) Math.pow(numa, numb) % (1000000007);
-		System.out.println(numa);
-	}
+	private final static int MOD = 1000000007;
+    public static void main(String[] args) throws IOException{
+        StringBuffer sb = new StringBuffer();
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        for(Byte T = Byte.parseByte(br.readLine()); T > 0; --T){
+            String[] temp = br.readLine().split(" ");
+            byte[] A = strToBigInt(temp[0]);
+            byte[] B = strToBigInt(temp[1]);
+            temp = null;
+            int Am = bigIntModInt(A, MOD);
+            int Bm = bigIntModInt(B, MOD - 1);
+            int C = pow(Am, Bm, MOD);
+            sb.append(C + "\n");
+        }
+        System.out.print(sb);
+    }
+    private static byte[] strToBigInt(String s){
+        char[] chars = s.toCharArray();
+        int n = chars.length;
+        byte[] bytes = new byte[n];
+        for(int i = 0; i < n; ++i){
+            bytes[i] = (byte)(chars[i] - '0');
+        }
+        return bytes;
+    }
+    private static int bigIntModInt(byte[] ar, int mod){
+        int n = ar.length;
+        long r = ar[0] % mod;
+        for(int i = 1; i < n; r = (10*r + ar[i++]) % mod){}
+        return (int)r;
+    }
+    private static int pow(int A, int B, int M){
+        if (B < 2){
+            return (B < 1) ? 1 : A % M;
+        }
+        long C = pow(A, B>>1, M);
+        C = (C*C) % M;
+        return ((B&1) == 0) ? (int)C : (int)((C*A)%M);
+    }
 }
