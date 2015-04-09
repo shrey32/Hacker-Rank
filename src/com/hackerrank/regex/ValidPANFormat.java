@@ -60,7 +60,7 @@ public class ValidPANFormat {
 			validatePAN(pan);
 			T--;
 		}
-		br.close();
+		 br.close();
 	}
 
 	private static void validatePAN(String pan) {
