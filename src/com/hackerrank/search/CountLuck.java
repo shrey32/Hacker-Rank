@@ -105,9 +105,6 @@ public class CountLuck {
 	private static void countLuck(String[][] arr, int dumI, int dumJ, int a,
 			int b, int c) {
 		int count = 0;
-		int i = 0;
-		int j = 0;
-
 		if (count == c) {
 			System.out.println("Impressed");
 		} else {
