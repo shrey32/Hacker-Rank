@@ -13,6 +13,7 @@ public class AlgorithmicCrush {
 	public static void main(String[] args) throws IOException {
 
 		Scanner scan = new Scanner(System.in);
+		@SuppressWarnings("unused")
 		int N = scan.nextInt();
 		int T = scan.nextInt();
 
