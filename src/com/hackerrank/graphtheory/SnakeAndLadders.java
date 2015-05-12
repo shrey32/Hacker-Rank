@@ -82,8 +82,8 @@ public class SnakeAndLadders {
 				String sl = br.readLine();
 				int l = Integer.parseInt(sl.split(",")[0]);
 				int s = Integer.parseInt(sl.split(",")[1]);
-				List<KeyVal> ladders = new ArrayList<KeyVal>();
-				List<KeyVal> snakes = new ArrayList<KeyVal>();
+				List<KeyVal> ladders = new ArrayList<KeyVal>(l);
+				List<KeyVal> snakes = new ArrayList<KeyVal>(s);
 				String l1 = br.readLine();
 				String s1 = br.readLine();
 				String[] lArr = l1.split(" ");
