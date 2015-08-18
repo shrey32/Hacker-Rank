@@ -39,7 +39,7 @@ public class SimpleArraySum {
 	public static void main(String[] args) throws NumberFormatException,
 			IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
+		br.readLine();
 		String line = br.readLine();
 		int sum = 0;
 		for (String s : line.split(" ")) {
