@@ -71,13 +71,13 @@ public class MaximiseSum {
 			curr = (s[i] % m + curr) % m;
 			prefix[i] = curr;
 		}
-		long ret = 0;
+		curr = 0;
 		for (int i = 0; i < n; i++) {
 			for (int j = i - 1; j >= 0; j--) {
-				ret = Math.max(ret, (prefix[i] - prefix[j] + m) % m);
+				curr = Math.max(curr, (prefix[i] - prefix[j] + m) % m);
 			}
-			ret = Math.max(ret, prefix[i]);
+			curr = Math.max(curr, prefix[i]);
 		}
-		System.out.println(ret);
+		System.out.println(curr);
 	}
 }
