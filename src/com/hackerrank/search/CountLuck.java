@@ -74,41 +74,95 @@ import java.io.InputStreamReader;
  */
 public class CountLuck {
 
+	private static int ENDI = 0;
+	private static int ENDJ = 0;
+	private static int STARTI = 0;
+	private static int STARTJ = 0;
+
+	public static class Node {
+		public int r, c = 0;
+		public Node pre = null;
+
+		public Node(int i, int j) {
+			this.r = i;
+			this.c = j;
+		}
+	}
+
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
 		while (T > 0) {
 			String line = br.readLine();
-			int a = Integer.parseInt(line.split(" ")[0]);
-			int b = Integer.parseInt(line.split(" ")[1]);
-			String[][] arr = new String[a][b];
-			int dumI = 0, dumJ = 0;
-			for (int i = 0; i < a; i++) {
-				String l = br.readLine();
-				for (int j = 0; j < b; j++) {
-					String s = l.split(" ")[j];
-					arr[i][j] = s;
-					if (s.equals("M")) {
-						dumI = i;
-						dumJ = j;
-					}
+			int row = Integer.parseInt(line.trim().split(" ")[0]);
+			int col = Integer.parseInt(line.trim().split(" ")[1]);
+			char[][] forest = new char[row][col];
+			for (int i = 0; i < row; i++) {
+				String l = br.readLine().trim();
+				forest[i] = l.toCharArray();
+				if (l.indexOf("M") >= 0) {
+					STARTI = i;
+					STARTJ = l.indexOf("M");
+				}
+				if (l.indexOf("*") >= 0) {
+					ENDI = i;
+					ENDJ = l.indexOf("*");
 				}
 			}
-			int c = Integer.parseInt(br.readLine());
-			countLuck(arr, dumI, dumJ, a, b, c);
+			int count = Integer.parseInt(br.readLine().trim());
+			boolean[][] seen = new boolean[row][col];
+			Node tail = new Node(ENDI, ENDJ);
+			Node head = null;
+			visit(forest, STARTI, STARTJ, seen, head, tail);
+			int counter = 0;
+			Node n = tail.pre;
+			while (n != null) {
+				// System.out.println(n.r + "-" + n.c);
+				int option = 0;
+				if (n.r - 1 >= 0 && n.r - 1 < row
+						&& forest[n.r - 1][n.c] == '.')
+					option++;
+				if (n.r + 1 >= 0 && n.r + 1 < row
+						&& forest[n.r + 1][n.c] == '.')
+					option++;
+				if (n.c - 1 >= 0 && n.c - 1 < col
+						&& forest[n.r][n.c - 1] == '.')
+					option++;
+				if (n.c + 1 >= 0 && n.c + 1 < col
+						&& forest[n.r][n.c + 1] == '.')
+					option++;
+				if (option > 2
+						|| (n == tail.pre && option > 1)
+						|| (n.r == STARTI && n.c == STARTJ && option > 1)
+						|| (n.pre != null && n.pre.r == STARTI
+								&& n.pre.c == STARTJ && option > 1))
+					counter++;
+				n = n.pre;
+			}
+			System.out.println(counter == count ? "Impressed" : "Oops!");
 			T--;
 		}
-
 		br.close();
 	}
 
-	private static void countLuck(String[][] arr, int dumI, int dumJ, int a,
-			int b, int c) {
-		int count = 0;
-		if (count == c) {
-			System.out.println("Impressed");
-		} else {
-			System.out.println("Oops!");
+	public static void visit(char[][] maze, int starti, int startj,
+			boolean[][] seen, Node pre, Node tail) {
+		if (starti < 0 || startj < 0 || starti >= maze.length
+				|| startj >= maze[0].length || seen[starti][startj])
+			return;
+		if (maze[starti][startj] == 'X')
+			return;
+		if (maze[starti][startj] == '*') {
+			tail.pre = pre;
+			return;
 		}
+		seen[starti][startj] = true;
+		Node n = new Node(starti, startj);
+		n.pre = pre;
+		visit(maze, starti - 1, startj, seen, n, tail);
+		visit(maze, starti + 1, startj, seen, n, tail);
+		visit(maze, starti, startj - 1, seen, n, tail);
+		visit(maze, starti, startj + 1, seen, n, tail);
 	}
+
 }
