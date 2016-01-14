@@ -124,50 +124,45 @@ public class MatrixRotation {
 		int cl = Integer.parseInt(line[1]);
 		int rotation = Integer.parseInt(line[2]);
 		line = null;
-		int[][] matrix = new int[rw][cl];
+		String[][] matrix = new String[rw][cl];
 		for (int i = 0; i < rw; i++) {
-			line = br.readLine().trim().split(" ");
-			for (int j = 0; j < line.length; j++)
-				matrix[i][j] = Integer.parseInt(line[j]);
+			matrix[i] = br.readLine().trim().split(" ");
 		}
-		int[][] mat = matrix;
 		while (rotation > 0) {
-			mat = rotate(mat);
+			matrix = rotate(matrix);
 			rotation--;
 		}
-		printMatrix(mat);
+		printMatrix(matrix);
 		br.close();
 	}
 
-	public static int[][] rotate(int[][] matrix) {
+	public static String[][] rotate(String[][] matrix) {
 		int row = matrix.length;
 		int col = matrix[0].length;
-		int[][] mat = new int[row][col];
-		int r = 0, c = 0;
-		int temp = matrix[r][c];
+		int r = 0, c = 0, r1 = 0, c1 = 0;
+		int rowLimit = 0, colLimit = 0;
 		int count = 0;
-		int r1 = 0;
-		int c1 = 0;
-		int m1 = 0, n1 = 0;
-		while (count < (row * col)) {
-			if (r + 1 < row - m1) {
+		String[][] mat = new String[row][col];
+		String temp = matrix[r][c];
+		while (count < row * col) {
+			if (r + 1 < row - rowLimit) {
 				mat[r + 1][c] = temp;
 				temp = matrix[r + 1][c];
 				count++;
 				r++;
 				r1 = r;
-			} else if (c + 1 < col - n1) {
+			} else if (c + 1 < col - colLimit) {
 				mat[r][c + 1] = temp;
 				temp = matrix[r][c + 1];
 				c++;
 				c1 = c;
 				count++;
-			} else if (r1 - 1 >= 0 + m1) {
+			} else if (r1 - 1 >= 0 + rowLimit) {
 				mat[r1 - 1][c] = temp;
 				temp = matrix[r1 - 1][c];
 				r1--;
 				count++;
-			} else if (c1 - 1 >= 0 + n1) {
+			} else if (c1 - 1 >= 0 + colLimit) {
 				mat[r1][c1 - 1] = temp;
 				temp = matrix[r1][c1 - 1];
 				c1--;
@@ -175,15 +170,15 @@ public class MatrixRotation {
 			} else {
 				r = r1 + 1;
 				c = c1 + 1;
-				m1 = m1 + 1;
-				n1 = n1 + 1;
+				rowLimit = rowLimit + 1;
+				colLimit = colLimit + 1;
 				temp = matrix[r][c];
 			}
 		}
 		return mat;
 	}
 
-	private static void printMatrix(int[][] matrix) {
+	private static void printMatrix(String[][] matrix) {
 		for (int row = 0; row < matrix.length; row++) {
 			for (int col = 0; col < matrix[row].length; col++) {
 				System.out.print(matrix[row][col] + " ");
