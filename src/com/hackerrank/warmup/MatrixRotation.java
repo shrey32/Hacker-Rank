@@ -3,6 +3,7 @@ package com.hackerrank.warmup;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 /**
  * Problem Statement
@@ -123,7 +124,6 @@ public class MatrixRotation {
 		int rw = Integer.parseInt(line[0]);
 		int cl = Integer.parseInt(line[1]);
 		int rotation = Integer.parseInt(line[2]);
-		line = null;
 		String[][] matrix = new String[rw][cl];
 		for (int i = 0; i < rw; i++) {
 			matrix[i] = br.readLine().trim().split(" ");
@@ -132,10 +132,17 @@ public class MatrixRotation {
 			matrix = rotate(matrix);
 			rotation--;
 		}
-		printMatrix(matrix);
+		Arrays.stream(matrix).map(a -> String.join(" ", a))
+				.forEach(System.out::println);
 		br.close();
 	}
 
+	/**
+	 * 
+	 * @param String
+	 *            [][] matrix
+	 * @return String[][] (rotated matrix)
+	 */
 	public static String[][] rotate(String[][] matrix) {
 		int row = matrix.length;
 		int col = matrix[0].length;
@@ -145,29 +152,29 @@ public class MatrixRotation {
 		String[][] mat = new String[row][col];
 		String temp = matrix[r][c];
 		while (count < row * col) {
-			if (r + 1 < row - rowLimit) {
+			if (r + 1 < row - rowLimit) { // (1) (left)top-down
 				mat[r + 1][c] = temp;
 				temp = matrix[r + 1][c];
 				count++;
 				r++;
 				r1 = r;
-			} else if (c + 1 < col - colLimit) {
+			} else if (c + 1 < col - colLimit) { // (2) (bottom)left-right
 				mat[r][c + 1] = temp;
 				temp = matrix[r][c + 1];
 				c++;
 				c1 = c;
 				count++;
-			} else if (r1 - 1 >= 0 + rowLimit) {
+			} else if (r1 - 1 >= 0 + rowLimit) { // (3) (right)down-top
 				mat[r1 - 1][c] = temp;
 				temp = matrix[r1 - 1][c];
 				r1--;
 				count++;
-			} else if (c1 - 1 >= 0 + colLimit) {
+			} else if (c1 - 1 >= 0 + colLimit) { // (4) (top)right-left
 				mat[r1][c1 - 1] = temp;
 				temp = matrix[r1][c1 - 1];
 				c1--;
 				count++;
-			} else {
+			} else { // (change) go for inner rotation, if any
 				r = r1 + 1;
 				c = c1 + 1;
 				rowLimit = rowLimit + 1;
@@ -176,14 +183,5 @@ public class MatrixRotation {
 			}
 		}
 		return mat;
-	}
-
-	private static void printMatrix(String[][] matrix) {
-		for (int row = 0; row < matrix.length; row++) {
-			for (int col = 0; col < matrix[row].length; col++) {
-				System.out.print(matrix[row][col] + " ");
-			}
-			System.out.println();
-		}
 	}
 }
