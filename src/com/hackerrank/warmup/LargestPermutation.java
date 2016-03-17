@@ -84,12 +84,13 @@ public class LargestPermutation {
 				break;
 			}
 		}
-
 		for (int val : num)
 			System.out.print(val + " ");
 
 		br.close();
 	}
+
+
 
 	private static int getMax(int[] num, int range) {
 		int max = Integer.MIN_VALUE;
