@@ -2,33 +2,16 @@ package com.hackerrank.datastructures.linkedlist;
 
 public class LinkedListStructure {
 
+	/**
+	 * root node of linked list
+	 */
 	private Node root;
 
-	public static void main(String[] args) {
-		LinkedListStructure l = new LinkedListStructure();
-		l.insert(1);
-		l.insert(2);
-		l.insert(3);
-		l.insert(4, 2);
-		System.out.println(l);
-		// l.delete(2);
-		System.out.println(l.reverse());
-		System.out.println(l.getValueFromTail(0));
-	}
-
-	private static class Node {
-		public int data;
-		public Node next;
-
-		public Node(int data) {
-			this.data = data;
-		}
-	}
-
-	public boolean isEmpty() {
-		return root == null;
-	}
-
+	/**
+	 * appends node at the tail of the list
+	 * 
+	 * @param data
+	 */
 	public void insert(int data) {
 		if (root == null) {
 			root = new Node(data);
@@ -41,6 +24,11 @@ public class LinkedListStructure {
 		currentNode.next = new Node(data);
 	}
 
+	/**
+	 * prepend node at the head of the list
+	 * 
+	 * @param data
+	 */
 	public void insertAtHead(int data) {
 		if (root == null) {
 			root = new Node(data);
@@ -51,6 +39,21 @@ public class LinkedListStructure {
 		root = newHead;
 	}
 
+	/**
+	 * checks if list is empty
+	 * 
+	 * @return
+	 */
+	public boolean isEmpty() {
+		return root == null;
+	}
+
+	/**
+	 * insert node at an specific position
+	 * 
+	 * @param data
+	 * @param position
+	 */
 	public void insert(int data, int position) {
 		if (root == null) {
 			root = new Node(data);
@@ -76,6 +79,11 @@ public class LinkedListStructure {
 		}
 	}
 
+	/**
+	 * delete node from position
+	 * 
+	 * @param position
+	 */
 	public void delete(int position) {
 		if (position == 0) {
 			root = root.next;
@@ -93,6 +101,11 @@ public class LinkedListStructure {
 		}
 	}
 
+	/**
+	 * returns reversed list
+	 * 
+	 * @return
+	 */
 	public LinkedListStructure reverse() {
 		LinkedListStructure list = new LinkedListStructure();
 		Node newRoot = null;
@@ -111,20 +124,41 @@ public class LinkedListStructure {
 		return list;
 	}
 
+	/**
+	 * compare two linked list
+	 * 
+	 * @param list
+	 * @return
+	 */
 	public int compare(LinkedListStructure list) {
-		Node temp = root;
-		Node otherTemp = list.root;
-		if (temp == null || otherTemp == null)
-			return 0;
-		while (temp != null && otherTemp != null) {
-			if (temp.data != otherTemp.data)
-				return 0;
-			temp = temp.next;
-			otherTemp = otherTemp.next;
-		}
-		return 1;
+		return compare(root, list.root);
 	}
 
+	/**
+	 * compare root nodes of two linked lists
+	 * 
+	 * @param root1
+	 * @param root2
+	 * @return
+	 */
+	private int compare(Node root1, Node root2) {
+		if (root1 == null && root2 == null)
+			return 1;
+		else if (root1 == null || root2 == null)
+			return 0;
+		if (root1.data == root2.data) {
+			return compare(root1.next, root2.next);
+		} else {
+			return 0;
+		}
+	}
+
+	/**
+	 * returns value from the tail
+	 * 
+	 * @param position
+	 * @return
+	 */
 	public int getValueFromTail(int position) {
 		int index = 0;
 		Node current = root;
@@ -136,6 +170,21 @@ public class LinkedListStructure {
 			}
 		}
 		return result.data;
+	}
+
+	/**
+	 * represents node of linked list
+	 * 
+	 * @author shrey.sharma
+	 *
+	 */
+	private static class Node {
+		public int data;
+		public Node next;
+
+		public Node(int data) {
+			this.data = data;
+		}
 	}
 
 	@Override
@@ -151,6 +200,24 @@ public class LinkedListStructure {
 		}
 		sb.append("]");
 		return sb.toString();
+	}
+
+	/**
+	 * test cases
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		LinkedListStructure l = new LinkedListStructure();
+		l.insert(1);
+		l.insert(2);
+		l.insert(3);
+		l.insert(4, 2);
+		System.out.println(l);
+		// l.delete(2);
+		System.out.println(l.reverse());
+		System.out.println(l.getValueFromTail(0));
+		System.out.println(l.compare(l));
 	}
 
 }
