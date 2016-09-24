@@ -172,6 +172,17 @@ public class LinkedListStructure {
 		return result.data;
 	}
 
+	public Node removeDuplicates(Node root) {
+		if (root == null)
+			return null;
+		Node nextItem = root.next;
+		while (nextItem != null && root.data == nextItem.data) {
+			nextItem = nextItem.next;
+		}
+		root.next = removeDuplicates(nextItem);
+		return root;
+	}
+
 	/**
 	 * represents node of linked list
 	 * 
@@ -210,14 +221,17 @@ public class LinkedListStructure {
 	public static void main(String[] args) {
 		LinkedListStructure l = new LinkedListStructure();
 		l.insert(1);
-		l.insert(2);
+		l.insert(1);
 		l.insert(3);
-		l.insert(4, 2);
+		l.insert(3);
+		l.insert(5);
+		l.insert(6);
 		System.out.println(l);
 		// l.delete(2);
 		System.out.println(l.reverse());
-		System.out.println(l.getValueFromTail(0));
-		System.out.println(l.compare(l));
+		// System.out.println(l.getValueFromTail(0));
+		// System.out.println(l.compare(l));
+		l.removeDuplicates(l.root);
 	}
 
 }
