@@ -55,6 +55,7 @@ public class HashTableRansomNote {
 		for (String s : line.split(" "))
 			map1.put(s, map1.containsKey(s) ? map1.get(s) + 1 : 1);
 		line = br.readLine().trim();// note
+		br.close();
 		Map<String, Integer> map2 = new HashMap<String, Integer>(w);
 		for (String s : line.split(" "))
 			map2.put(s, map2.containsKey(s) ? map2.get(s) + 1 : 1);
@@ -66,6 +67,5 @@ public class HashTableRansomNote {
 			}
 		}
 		System.out.println(isPresent ? "Yes" : "No");
-		br.close();
 	}
 }
