@@ -1,7 +1,9 @@
 package com.hackerrank.search;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 
 /**There are N integers in an array A. All but one integer occur in pairs. Your task is to find out the number that occurs only once.
 
@@ -57,7 +59,6 @@ public class LonelyInteger {
 		Scanner scan = new Scanner(System.in);
 		int N = scan.nextInt();
 		HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
-
 		for (int i = 0; i < N; i++) {
 			int a = scan.nextInt();
 			if (!map.containsKey(a)) {
@@ -66,19 +67,16 @@ public class LonelyInteger {
 				int val = map.get(a);
 				map.put(a, val + 1);
 			}
-
 		}
-		int i = 0;
-		while (true) {
-			if (map.containsKey(i)) {
-				if (map.get(i) == 1) {
-					System.out.println(i);
-					break;
-				}
+		Set<Integer> keys = map.keySet();
+		Iterator<Integer> itr = keys.iterator();
+		while (itr.hasNext()) {
+			int i = itr.next();
+			if (map.get(i) == 1) {
+				System.out.println(i);
+				break;
 			}
-			i++;
 		}
-
 		scan.close();
 	}
 }
