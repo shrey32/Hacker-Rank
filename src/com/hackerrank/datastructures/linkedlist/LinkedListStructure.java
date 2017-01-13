@@ -197,6 +197,24 @@ public class LinkedListStructure {
 		return true;
 	}
 
+	Node Reverse(Node head) {
+		Node newHead = null;
+		Node tmp = head;
+		while (tmp != null) {
+			if (newHead == null) {
+				newHead = new Node();
+				newHead.data = tmp.data;
+			} else {
+				Node reverse = new Node();
+				reverse.data = tmp.data;
+				reverse.next = newHead;
+				newHead = reverse;
+			}
+			tmp = tmp.next;
+		}
+		return newHead;
+	}
+
 	/**
 	 * represents node of linked list
 	 * 
@@ -206,6 +224,9 @@ public class LinkedListStructure {
 	private static class Node {
 		public int data;
 		public Node next;
+
+		public Node() {
+		}
 
 		public Node(int data) {
 			this.data = data;
