@@ -3,6 +3,8 @@ package com.hackerrank.datastructures.tree;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * 
@@ -88,4 +90,19 @@ public class BinarySearchTreeInsertion {
 		}
 	}
 
+	void levelOrderTraversal(Node root) {
+		Queue<Node> q = new LinkedList<Node>();
+		if (root == null)
+			return;
+		q.add(root);
+
+		while (!q.isEmpty()) {
+			Node tmp = q.poll();
+			System.out.print(tmp.data + " ");
+			if (tmp.left != null)
+				q.offer(tmp.left);
+			if (tmp.right != null)
+				q.offer(tmp.right);
+		}
+	}
 }
