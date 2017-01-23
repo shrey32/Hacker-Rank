@@ -67,4 +67,25 @@ public class BinarySearchTreeInsertion {
 		return (checkBST(root.left, min, root.data - 1) && checkBST(root.right,
 				root.data + 1, max));
 	}
+
+	void topView(Node root) {
+		if (root == null)
+			return;
+		topView(root.left, true);
+		System.out.print(root.data + " ");
+		topView(root.right, false);
+	}
+
+	void topView(Node root, boolean toLeft) {
+		if (root == null)
+			return;
+		if (toLeft) {
+			topView(root.left, toLeft);
+			System.out.print(root.data + " ");
+		} else {
+			System.out.print(root.data + " ");
+			topView(root.right, toLeft);
+		}
+	}
+
 }
