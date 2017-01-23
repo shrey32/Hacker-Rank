@@ -57,6 +57,24 @@ public class BinarySearchTreeInsertion {
 		return root;
 	}
 
+	static boolean find(Node n, int data) {
+		if (n == null)
+			return false;
+		if (n.data > data) {
+			// search in left child
+			return find(n.left, data);
+		} else if (n.data < data) {
+			// search in right child
+			return find(n.right, data);
+		} else if (n.data == data) {
+			// root
+			return true;
+		} else {
+			// not found in tree
+			return false;
+		}
+	}
+
 	boolean checkBST(Node root) {
 		return checkBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
@@ -105,4 +123,53 @@ public class BinarySearchTreeInsertion {
 				q.offer(tmp.right);
 		}
 	}
+
+	/**
+	 * Delete a node the tree with value n. Its O(lgn)
+	 * 
+	 * @param n
+	 * @return
+	 */
+	static boolean delete(Node root, int data, boolean val) {
+		if (root == null)
+			return false;
+		if (!find(root, data))
+			return false;
+		root = delete(root, data);
+		return true;
+	}
+
+	private static Node delete(Node root, int data) {
+		Node p, p2, n;
+		if (root.data == data) {
+			Node lt, rt;
+			lt = root.left;
+			rt = root.right;
+			if (lt == null && rt == null)
+				return null;
+			else if (lt == null) {
+				p = rt;
+				return p;
+			} else if (rt == null) {
+				p = lt;
+				return p;
+			} else {
+				p2 = rt;
+				p = rt;
+				while (p.left != null)
+					p = p.left;
+				p.left = lt;
+				return p2;
+			}
+		}
+		if (data < root.data) {
+			n = delete(root.left, data);
+			root.left = n;
+		} else {
+			n = delete(root.right, data);
+			root.right = n;
+		}
+		return root;
+	}
+
 }
