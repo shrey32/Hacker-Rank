@@ -57,6 +57,38 @@ public class BinarySearchTreeInsertion {
 		return root;
 	}
 
+	static Node leastCommonAncestor(Node root, int v1, int v2) {
+		if (root == null)
+			return null;
+		Node p1 = findParent(root, v1);
+		Node p2 = findParent(root, v2);
+		if (p2.data == v1)
+			return p2;
+		if (p1.data == p2.data)
+			return p1;
+		while (p1.data != p2.data) {
+			p1 = findParent(root, p1.data);
+			p2 = findParent(root, p2.data);
+		}
+		return p1;
+	}
+
+	static Node findParent(Node root, int val) {
+		if (root == null)
+			return null;
+		if (root.data > val) {
+			if (root.left != null && root.left.data == val)
+				return root;
+			return findParent(root.left, val);
+		} else if (root.data < val) {
+			if (root.right != null && root.right.data == val)
+				return root;
+			return findParent(root.right, val);
+		} else {
+			return root;
+		}
+	}
+
 	static boolean find(Node n, int data) {
 		if (n == null)
 			return false;
