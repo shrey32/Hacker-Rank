@@ -8,7 +8,7 @@ package com.hackerrank.warmup;
 public class SpiralMatrix {
 
 	public static void main(String[] args) {
-		int n = 8;
+		int n = 5;
 		int[][] ar = new int[n][n];
 		for (int i = 0, count = 1; i < n; i++) {
 			for (int j = 0; j < n; j++) {
@@ -59,6 +59,7 @@ public class SpiralMatrix {
 				colc++;
 				i = rowc;
 				j = colc;
+				System.out.println();
 			}
 		}
 	}
