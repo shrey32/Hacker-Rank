@@ -51,12 +51,10 @@ public class MakeItAnagram {
 		ArrayList<Character> cListB = new ArrayList<Character>();
 
 		for (int i = 0; i < a.length(); i++) {
-			Character c = new Character(a.charAt(i));
-			cList.add(c);
+			cList.add(a.charAt(i));
 		}
 		for (int i = 0; i < b.length(); i++) {
-			Character c = new Character(b.charAt(i));
-			cListB.add(c);
+			cListB.add(b.charAt(i));
 		}
 
 		ArrayList<Character> d = new ArrayList<Character>(cListB);

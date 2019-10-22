@@ -40,6 +40,6 @@ public class MaximumDraws {
 	}
 
 	private final static int maximumDraws(int n) {
-		return ((n * 2) / 2) + 1;
+		return n + 1;
 	}
 }

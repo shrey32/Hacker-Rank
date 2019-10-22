@@ -3,8 +3,6 @@ package com.hackerrank.strings;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * A numeric string, , is beautiful if it can be split into a sequence of two or more positive integers, , satisfying the following conditions:

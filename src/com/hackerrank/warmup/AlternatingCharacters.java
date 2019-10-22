@@ -49,9 +49,8 @@ import java.io.InputStreamReader;
  */
 public class AlternatingCharacters {
 	public static void main(String[] args) {
-		 try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
+		try {
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			int T = Integer.parseInt(br.readLine());
 			for (int i = 0; i < T; i++) {
 				String line = br.readLine();
@@ -67,11 +66,11 @@ public class AlternatingCharacters {
 		int count = 0;
 		for (int i = 0; i < line.length(); i++) {
 			if (i < line.length() - 1) {
-				Character c = new Character(line.charAt(i));
-				Character c1 = new Character(line.charAt(i + 1));
+				Character c = line.charAt(i);
+				Character c1 = line.charAt(i + 1);
 				if (c1 > c) {
 					if (i < line.length() - 2) {
-						Character c2 = new Character(line.charAt(i + 2));
+						Character c2 = line.charAt(i + 2);
 						if (String.valueOf(c1).equals(String.valueOf(c2))) {
 							count++;
 						}

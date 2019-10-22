@@ -47,13 +47,11 @@ public class Pangram {
 
 	public static void main(String[] args) {
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					System.in));
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			String s = br.readLine().toLowerCase();
 			List<String> list = charList();
 			for (int i = 0; i < s.length(); i++) {
-				Character c = new Character(s.charAt(i));
-				String sr = String.valueOf(c);
+				String sr = String.valueOf(s.charAt(i));
 				if (!sr.equals("") && list.contains(sr)) {
 					list.remove(list.indexOf(sr));
 				}

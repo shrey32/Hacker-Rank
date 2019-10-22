@@ -109,7 +109,7 @@ public class BuyMaximumStocks {
 		}
 	}
 
-	private static long numberOfStocks(String[] data, long k) {
+	static long numberOfStocks(String[] data, long k) {
 		long totalStocks = 0;
 		long totalAmount = 0;
 		for (int i = 0; i < data.length; i++) {

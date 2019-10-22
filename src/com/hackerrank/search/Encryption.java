@@ -77,7 +77,7 @@ public class Encryption {
 		}
 		String[] s = new String[length];
 		for (int k = 0; k < s.length; k++) {
-			Character ch = new Character(S.charAt(k));
+			Character ch = S.charAt(k);
 			s[k] = ch.toString();
 		}
 

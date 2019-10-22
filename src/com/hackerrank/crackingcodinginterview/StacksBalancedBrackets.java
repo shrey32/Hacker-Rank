@@ -55,8 +55,7 @@ import java.util.Stack;
  */
 public class StacksBalancedBrackets {
 
-	public static void main(String[] args) throws NumberFormatException,
-			IOException {
+	public static void main(String[] args) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int t = Integer.parseInt(br.readLine().trim());
 		String expression = "";
@@ -72,11 +71,11 @@ public class StacksBalancedBrackets {
 		Stack<Character> stack = new Stack<Character>();
 		for (char c : expression.toCharArray()) {
 			if (c == '{')
-				stack.push(new Character('}'));
+				stack.push('}');
 			else if (c == '[')
-				stack.push(new Character(']'));
+				stack.push(']');
 			else if (c == '(')
-				stack.push(new Character(')'));
+				stack.push(')');
 			else {
 				if (stack.isEmpty() || c != stack.peek())
 					return false;
