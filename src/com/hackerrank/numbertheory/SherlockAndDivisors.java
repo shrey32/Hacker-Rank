@@ -41,21 +41,27 @@ import java.io.InputStreamReader;
  */
 public class SherlockAndDivisors {
 
-	public static void main(String[] args) throws NumberFormatException,
-			IOException {
-		int n = 100000000;
-		int[] divcount = new int[n + 1];
-		for (int i = 2; i <= n; i+=2) {
-			for (int j = i; j <= n; j += i) {
-				divcount[j]++;
-			}
-		}
+	public static void main(String[] args) throws NumberFormatException, IOException {			
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		int T = Integer.parseInt(br.readLine());
 		while (T > 0) {
 			int num = Integer.parseInt(br.readLine());
-			System.out.println(divcount[num]);
+			System.out.println(divisors(num));
 			T--;
 		}
 	}
+
+	static int divisors(int n) {
+		int count = 0;
+		if (n % 2 == 0)
+			count++;
+		for (long i = 2; i <= Math.sqrt(n); i++) {
+			if (n % i == 0 && i % 2 == 0)
+				count++;
+			if (n % (n / i) == 0 && ((n / i) != i) && ((n / i) % 2 == 0))
+				count++;
+		}
+		return count;
+	}
+
 }
