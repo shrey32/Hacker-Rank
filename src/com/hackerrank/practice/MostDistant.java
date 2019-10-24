@@ -22,14 +22,19 @@ public class MostDistant {
 				miny = y;
 		}
 
-		Double max = Double.MIN_VALUE;
+		Double max = 0.0;
+
+		double minxsq = Math.pow(minx, 2);
+		double maxxsq = Math.pow(maxx, 2);
+		double minysq = Math.pow(miny, 2);
+		double maxysq = Math.pow(maxy, 2);
 
 		max = Math.max(max, maxx - minx);
 		max = Math.max(max, maxy - miny);
-		max = Math.max(max, Math.sqrt(Math.pow(maxx, 2) + Math.pow(maxy, 2)));
-		max = Math.max(max, Math.sqrt(Math.pow(maxx, 2) + Math.pow(miny, 2)));
-		max = Math.max(max, Math.sqrt(Math.pow(minx, 2) + Math.pow(maxy, 2)));
-		max = Math.max(max, Math.sqrt(Math.pow(minx, 2) + Math.pow(miny, 2)));
+		max = Math.max(max, Math.sqrt(maxxsq + maxysq));
+		max = Math.max(max, Math.sqrt(maxxsq + minysq));
+		max = Math.max(max, Math.sqrt(minxsq + maxysq));
+		max = Math.max(max, Math.sqrt(minxsq + minysq));
 
 		return max;
 	}
