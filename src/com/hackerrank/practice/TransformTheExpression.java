@@ -32,6 +32,8 @@ public class TransformTheExpression {
 
 			char curr = exp.charAt(i);
 
+			if (curr == '(')
+				continue;
 			// when math operators comes put it in stack
 			if (operators.indexOf(curr) >= 0) {
 				opsStack.push(curr);
@@ -39,11 +41,10 @@ public class TransformTheExpression {
 			}
 
 			// for all non math operators
-			if (curr == ')' && !opsStack.isEmpty()) {
+			if (curr == ')' && !opsStack.isEmpty())
 				transformed.append(opsStack.pop());
-			} else if (curr != ')' && curr != '(') {
+			else
 				transformed.append(curr);
-			}
 		}
 
 		return transformed.toString();
