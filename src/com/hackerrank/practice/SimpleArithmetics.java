@@ -107,7 +107,7 @@ package com.hackerrank.practice;
  * @author Shrey
  *
  */
-public class SimpleArtihmetics {
+public class SimpleArithmetics {
 
 	private final static String ADD = "+";
 	private final static String SUB = "-";
