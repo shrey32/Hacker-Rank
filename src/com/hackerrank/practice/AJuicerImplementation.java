@@ -25,24 +25,11 @@ public class AJuicerImplementation {
 	}
 
 	private static final int squeezerDegree(int[] oranges, int b, int d, int n) {
-		if (n == 1 && oranges[0] < b)
-			return 0;
-		Arrays.sort(oranges);
 		int count = 0;
 		int sum = 0;
 		for (int i = 0; i < n; i++) {
 			int curr = oranges[i];
 			sum += curr;
-			int j = i;
-			while (j + 1 < n) {
-				if (sum + oranges[j + 1] < d) {
-					sum += oranges[j + 1];
-					j++;
-				} else {
-					i = j != i ? --j : j;
-					break;
-				}
-			}
 			if (sum > d) {
 				count++;
 				sum = 0;
