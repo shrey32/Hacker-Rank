@@ -1,6 +1,5 @@
 package com.hackerrank.practice;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
