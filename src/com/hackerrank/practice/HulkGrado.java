@@ -28,11 +28,11 @@ public class HulkGrado {
 			isHate = !isHate;
 		}
 		if (isHate)
-			feelings.append("I hate it ");
+			feelings.append("I hate it");
 		else
-			feelings.append("I love it ");
+			feelings.append("I love it");
 
-		return feelings.toString().trim();
+		return feelings.toString();
 	}
 
 }
