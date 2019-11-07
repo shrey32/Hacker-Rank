@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * <a href="https://www.spoj.com/problems/HYDRO/" ></a>
+ * <a href="https://www.spoj.com/problems/HYDRO/" >Hydro Electric Dams</a>
  * 
  * @author Shrey
  *
