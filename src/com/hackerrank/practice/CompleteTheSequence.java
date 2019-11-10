@@ -81,8 +81,8 @@ public class CompleteTheSequence {
 	 * @return
 	 */
 	static boolean check(List<Integer> a) {
-		for (int i = 1; i < a.size(); i++)
-			if (a.get(i - 1) != a.get(i))
+		for (int s : a)
+			if (s != a.get(0))
 				return false;
 		return true;
 	}
