@@ -2,6 +2,12 @@ package com.hackerrank.practice;
 
 import java.util.Scanner;
 
+/**
+ * <a href="https://www.spoj.com/problems/VLN/">Loan for Bike</a>
+ * 
+ * @author Shrey
+ *
+ */
 public class LoanForBike {
 
 	public static void main(String[] args) {
