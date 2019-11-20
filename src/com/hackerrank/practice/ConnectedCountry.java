@@ -1,8 +1,10 @@
 package com.hackerrank.practice;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -17,22 +19,29 @@ public class ConnectedCountry {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		scan.nextInt();
+		int n = scan.nextInt();
 		int m = scan.nextInt();
 		List<Node> graphs = new ArrayList<>();
+		Map<Integer, Node> map = new HashMap<>(n);
 		for (int i = 0; i < m; i++) {
 			int a = scan.nextInt();
 			int b = scan.nextInt();
-			Node found = find(graphs, a);
+			Node found = map.get(a);
+			if (found == null)
+				found = find(graphs, a);
 			if (found == null) {
 				found = getNode(a);
 				found.left = getNode(b);
 				graphs.add(found);
+				map.put(a, found);
 			} else if (found != null) {
-				if (found.left == null)
+				if (found.left == null) {
 					found.left = getNode(b);
-				else if (found.right == null)
+					map.put(b, found.left);
+				}else if (found.right == null) {
 					found.right = getNode(b);
+					map.put(b, found.right);
+				}
 			}
 		}
 		System.out.println(graphs.size() - 1);
