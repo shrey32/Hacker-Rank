@@ -56,25 +56,26 @@ public class SimplifyIT {
 		if (q > 1)
 			simplified.append(q);
 
+		int state = (c > 1 ? c : 1);
 		if ("1".equals(cond)) {
-			expressions.put(simplified.toString(),
-					expressions.getOrDefault(simplified.toString(), 0) + ((c > 1) ? c : 1));
+			state = expressions.getOrDefault(simplified.toString(), 0) + state;
 			ops.add("+");
 		} else if ("2".equals(cond)) {
-			expressions.put(simplified.toString(),
-					expressions.getOrDefault(simplified.toString(), 0) + (-((c > 1) ? c : 1)));
+			state = expressions.getOrDefault(simplified.toString(), 0) - state;
 			ops.add("-");
 		}
+
+		expressions.put(simplified.toString(), state);
 	}
 
 	private final static void print(Map<String, Integer> expressions, List<String> ops) {
-		int i = 0;
+		int i = 1;
 		for (String key : expressions.keySet()) {
 			int val = expressions.get(key);
 			if (val > 1)
 				System.out.print(val);
 			System.out.print(key);
-			if (i < expressions.size() - 1) {
+			if (i < expressions.size()) {
 				System.out.print(ops.get(i));
 				i++;
 			}
