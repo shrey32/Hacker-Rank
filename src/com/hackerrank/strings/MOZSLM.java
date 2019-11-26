@@ -1,7 +1,5 @@
 package com.hackerrank.strings;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -18,59 +16,53 @@ public class MOZSLM {
 		int t = scan.nextInt();
 		while (t-- > 0) {
 			String s = scan.next();
-			System.out.println(bruteForce(s));
+			System.out.println(solve(process(s)));
 		}
 		scan.close();
 	}
 
-	static final int orderOfN(String s) {
-		Map<Character, Integer> map = new HashMap<>();
-		for (char c : s.toCharArray())
-			if (c == 's' || c == 'm')
-				map.put(c, map.getOrDefault(c, 0) + 1);
-		int count = 0;
+	static final String process(String s) {
+		StringBuilder sb = new StringBuilder();
+		char start = 's';
+		int lastInd = s.lastIndexOf(start);
+		int firstInd = s.indexOf(start);
 
-		for (int i = 0; i < s.length(); i++) {
+		for (int i = firstInd; i <= lastInd; i++) {
 			char c = s.charAt(i);
-			if (c != 's')
-				continue;
-			// find next s before m
-			int scount = 1;
-			int j = i + 1;
-			while (j < s.length() && s.charAt(j) != 'm') {
-				if (s.charAt(j) == 's')
-					scount++;
-				j++;
-			}
-			// find next m count before s
-			int mcount = 1;
-			int k = j + 1;
-			while (k < s.length() && s.charAt(k) != 's') {
-				if (s.charAt(k) == 'm')
-					mcount++;
-				k++;
-			}
-			map.put('s', map.get('s') - scount);
-			count += (map.get('s') * scount) * mcount;
-			i = k-1;
+			if (c == 's' || c == 'm')
+				sb.append(c);
 		}
-
-		return count;
+		return sb.toString();
 	}
 
-	static final int bruteForce(String s) {
+	static final int solve(String s) {
 		int count = 0;
-		for (int i = 0; i < s.length(); i++) {
+		int total = 1;
+		int[] totals = new int[s.length()];
+		totals[0] = 1;
+		// counting prior 's'
+		for (int i = 1; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c == 's') {
+				totals[i] = totals[i - 1] + 1;
+				total++;
+			} else
+				totals[i] = totals[i - 1];
+		}
+
+		// process
+		for (int i = 0; i < s.length() - 2; i++) {
 			if ('s' != s.charAt(i))
 				continue;
-			for (int j = i + 1; j < s.length(); j++) {
-				if ('m' != s.charAt(j))
-					continue;
-				for (int k = j + 1; k < s.length(); k++) {
-					if ('s' != s.charAt(k))
-						continue;
-					count++;
+			int k = i + 1;
+			int endScount = 0;
+			while (k < s.length() - 1) {
+				if ('m' != s.charAt(k)) {
+					endScount++;
+				} else {
+					count += (total - totals[i] - endScount);
 				}
+				k++;
 			}
 		}
 		return count;
