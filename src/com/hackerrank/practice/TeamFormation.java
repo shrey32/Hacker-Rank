@@ -23,19 +23,26 @@ public class TeamFormation {
 	private static final int numberOfWays(int n) {
 		if (n < 2)
 			return 0;
-		BigInteger mod = BigInteger.valueOf(1000000007);
+		BigInteger mod = new BigInteger("1000000007");
 		BigInteger result = BigInteger.ZERO;
 		for (int i = n; i >= 2; i--) {
-			result = result.add(fact(n).divide(fact(i).multiply(fact(n - i))).mod(mod));
+			BigInteger nfact = BigInteger.ONE;
+			BigInteger rfact = BigInteger.ONE;
+			BigInteger diff = BigInteger.ONE;
+			for (int j = 2; j <= n; j++) {
+				BigInteger jth = new BigInteger(j + "");
+				if (j <= i) {// rfact
+					rfact = rfact.multiply(jth);
+				}
+				if (j <= (n - i)) {// diff
+					diff = diff.multiply(jth);
+				}
+				// nfact
+				nfact = nfact.multiply(jth);
+			}
+			result = result.add(nfact.divide(rfact.multiply(diff)).mod(mod));
 		}
 		return result.intValue() * n;
-	}
-
-	private final static BigInteger fact(int n) {
-		BigInteger fact = new BigInteger("1");
-		for (int i = 2; i <= n; i++)
-			fact = fact.multiply(new BigInteger(i + ""));
-		return fact;
 	}
 
 }
