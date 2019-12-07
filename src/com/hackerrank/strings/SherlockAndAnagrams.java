@@ -1,7 +1,10 @@
 package com.hackerrank.strings;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -85,24 +88,81 @@ import java.util.Set;
 public class SherlockAndAnagrams {
 
 	public static void main(String[] args) {
-		System.out.println(sherlockAndAnagrams("abba"));// 4
-		System.out.println(sherlockAndAnagrams("abcd"));// 0
-		//System.out.println(sherlockAndAnagrams("ifailuhkqq"));// 3
-		System.out.println(sherlockAndAnagrams("kkkk"));// 10
-		System.out.println(sherlockAndAnagrams("cdcd"));// 5
+		System.out.println(String.format("id = %08.2f", 423.147));
+		final Set<String> set = new HashSet<>(Arrays.asList("s","s2"));
+		set.add("s3");
+		System.out.println(set);
+		System.out.println(Integer.parseInt(Integer.toBinaryString(12),2));
+		System.out.println(solve("abba"));// 4
+		System.out.println(solve("abcd"));// 0
+		// System.out.println(sherlockAndAnagrams("ifailuhkqq"));// 3
+		System.out.println(solve("kkkk"));// 10
+		System.out.println(solve("cdcd"));// 5
+	}
+
+	static int solve(String s) {
+		List<String> substrs = new ArrayList<>();
+		int len = s.length();
+
+		for (int i = 0; i < len-1; i++) {
+			char ci = s.charAt(i);
+			substrs.add(ci + "");
+			StringBuilder sb = new StringBuilder();
+			for (int j = i + 1; j < len; j++) {
+				sb.append(s.charAt(j));
+				substrs.add(sb.toString());
+			}
+		}
+		
+		for (int i = 0; i < len-1; i++) {
+			StringBuilder sb = new StringBuilder();
+			sb.append(s.charAt(i));
+			for (int j = i + 1; j < len; j++) {
+				sb.append(s.charAt(j));
+				substrs.add(sb.toString());
+			}
+		}
+
+		System.out.println(substrs);
+		
+
+		return -1;
+	}
+
+	static boolean anagrams(String a, String b) {
+		if (a.length() != b.length())
+			return false;
+
+		int[] one = new int[26];
+
+		for (char c : a.toCharArray())
+			one[c - 'a']++;
+
+		for (char c : b.toCharArray())
+			one[c - 'a']--;
+
+		for (int i : one)
+			if (i != 0)
+				return false;
+
+		return true;
 	}
 
 	// Complete the sherlockAndAnagrams function below.
 	static int sherlockAndAnagrams(String s) {
 		Map<String, Integer> map = new LinkedHashMap<>();
 		for (char c : s.toCharArray())
-			map.put(String.valueOf(c),
-					map.getOrDefault(String.valueOf(c), 0) + 1);
+			map.put(String.valueOf(c), map.getOrDefault(String.valueOf(c), 0) + 1);
 
 		for (int i = 0; i < s.length() - 1; i++) {
-			StringBuilder sb = new StringBuilder(String.valueOf(s.charAt(i)));
+			char ci = s.charAt(i);
+			StringBuilder sb = new StringBuilder();
+			sb.append(ci);
 			for (int j = i + 1; j < s.length() - 1; j++) {
-				sb.append(String.valueOf(s.charAt(j)));
+				char cj = s.charAt(j);
+				if (ci == cj)
+					continue;
+				sb.append(cj);
 				map.put(sb.toString(), map.getOrDefault(sb.toString(), 0) + 1);
 			}
 		}
@@ -124,14 +184,29 @@ public class SherlockAndAnagrams {
 		return count;
 	}
 
+	private static class Pair {
+		String key, substr;
+
+		public Pair(String key, String pair) {
+			this.key = key;
+			this.substr = pair;
+		}
+
+		@Override
+		public String toString() {
+			return "(" + key + "=>" + substr + ")";
+		}
+
+	}
+
 	static void permutation(String prefix, String remaining, Set<String> set) {
 		if (remaining.length() == 0) {
 			set.add(prefix);
 			return;
 		}
 		for (int i = 0; i < remaining.length(); i++) {
-			permutation(prefix + remaining.charAt(i), remaining.substring(0, i)
-					+ remaining.substring(i + 1, remaining.length()), set);
+			permutation(prefix + remaining.charAt(i),
+					remaining.substring(0, i) + remaining.substring(i + 1, remaining.length()), set);
 		}
 	}
 
