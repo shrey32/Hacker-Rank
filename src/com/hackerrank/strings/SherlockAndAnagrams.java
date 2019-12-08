@@ -184,7 +184,7 @@ public class SherlockAndAnagrams {
 		return count;
 	}
 
-	private static class Pair {
+	static class Pair {
 		String key, substr;
 
 		public Pair(String key, String pair) {

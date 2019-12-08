@@ -95,7 +95,7 @@ public class KnightMoves {
 
 	}
 
-	private static final int bfs(String a, String b, boolean[][] visited) {
+	static final int bfs(String a, String b, boolean[][] visited) {
 		int istart = rows.indexOf(a.split("")[0] + "");
 		int jstart = Integer.parseInt(a.split("")[1]) - 1;
 		int iend = rows.indexOf(b.split("")[0] + "");
