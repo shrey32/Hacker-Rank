@@ -70,6 +70,7 @@ public class UniqueColors {
 		return f;
 	}
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws Exception {
 		InputReader in = new InputReader(System.in);
 		PrintWriter pw = new PrintWriter(System.out);
