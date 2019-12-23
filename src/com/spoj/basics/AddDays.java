@@ -22,17 +22,17 @@ public class AddDays {
 		while (t-- > 0) {
 			String dateStr = scan.next();
 			int days = scan.nextInt();
-			newDate(dateStr, days);
+			System.out.println(newDate(dateStr, "dd-MM-yyyy", days));
 		}
 		scan.close();
 	}
 
-	private final static void newDate(String dateStr, int days) throws ParseException {
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	private final static String newDate(String dateStr, String pattern, int days) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat(pattern);
 		Date date = sdf.parse(dateStr);
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		localDate = localDate.plusDays(days);
-		System.out.println(localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+		return localDate.format(DateTimeFormatter.ofPattern(pattern));
 	}
 
 }
