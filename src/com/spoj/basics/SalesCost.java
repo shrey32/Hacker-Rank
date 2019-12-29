@@ -12,7 +12,7 @@ public class SalesCost {
 
 	public static void main(String[] args) {
 		System.out.println(getCheapestCost(input1()));// 7
-		System.out.println(getCheapestCost(input2()));// 7
+		System.out.println(getCheapestCost(input2()));// 34
 	}
 
 	private static final int getCheapestCost(Node root) {
