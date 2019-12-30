@@ -215,6 +215,27 @@ public class LinkedListStructure {
 		return newHead;
 	}
 
+	public Node merge(Node head1, Node head2) {
+		Node merged = new Node(0);
+		Node temp = merged;
+		while (head1 != null || head2 != null) {
+
+			if (head1 != null && head2 != null && head1.data <= head2.data) {
+				temp.next = new Node(head1.data);
+				head1 = head1.next;
+			} else if (head2 != null) {
+				temp.next = new Node(head2.data);
+				head2 = head2.next;
+			} else if (head1 != null) {
+				temp.next = new Node(head1.data);
+				head1 = head1.next;
+			}
+			temp = temp.next;
+		}
+
+		return merged.next;
+	}
+
 	/**
 	 * represents node of linked list
 	 * 
