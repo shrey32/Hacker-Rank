@@ -10,6 +10,8 @@ import java.util.Scanner;
  * @author Shrey
  *
  */
+
+
 public class TotalDecodingMessages {
 
 	public static void main(String[] args) {
