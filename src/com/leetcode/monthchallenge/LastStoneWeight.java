@@ -2,7 +2,9 @@ package com.leetcode.monthchallenge;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 /**
  * 
@@ -21,26 +23,20 @@ public class LastStoneWeight {
 		if (stones == null || stones.length == 0)
 			return 0;
 
-		int n = stones.length;
-
-		List<Integer> list = new ArrayList<>(n);
+		Comparator<Integer> comp = (a, b) -> b - a;
+		PriorityQueue<Integer> queue = new PriorityQueue<>(comp);
 
 		for (int stone : stones)
-			list.add(stone);
+			queue.offer(stone);
 
-		Collections.sort(list);
-
-		while (list.size() > 1) {
-			int max1 = list.remove(list.size() - 1);
-			int max2 = list.remove(list.size() - 1);
-			int diff = Math.abs(max1 - max2);
-			if (diff > 0) {
-				list.add(diff);
-				Collections.sort(list);
+		while (queue.size() > 1) {
+			int max1 = queue.poll();
+			int max2 = queue.poll();
+			if (max1 != max2) {
+				queue.offer(max1 - max2);
 			}
 		}
 
-		return list.size() == 1 ? list.get(list.size() - 1) : 0;
-
+		return queue.isEmpty() ? 0 : queue.poll();
 	}
 }
