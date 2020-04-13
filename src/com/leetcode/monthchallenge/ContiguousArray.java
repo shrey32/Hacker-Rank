@@ -1,6 +1,5 @@
 package com.leetcode.monthchallenge;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,9 +60,6 @@ public class ContiguousArray {
 
 		for (int i = 0; i < dp.length; i++)
 			dp[i] = nums[i] == 0 ? -1 : 1;
-
-		if (Arrays.stream(dp).sum() == 0)
-			return dp.length;
 
 		Map<Integer, Integer> map = new HashMap<>();
 		int sum = 0, max = 0;
