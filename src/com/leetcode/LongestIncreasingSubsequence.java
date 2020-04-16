@@ -9,8 +9,8 @@ public class LongestIncreasingSubsequence {
 	}
 
 	public static int lengthOfLIS(int[] nums) {
-		if (nums == null || nums.length == 0)
-			return 0;
+		if (nums.length <= 1)
+			return nums.length;
 		int n = nums.length;
 		int[] dp = new int[n];
 		int max = -1;
