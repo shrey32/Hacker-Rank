@@ -66,13 +66,16 @@ import java.util.List;
  * <b>Constraints:</b>
  * 
  * <p>
- * 1 <= mat.length, mat[i].length <= 100 mat[i][j] is either 0 or 1. mat[i] is
- * sorted in a non-decreasing way. Hide Hint #1 1. (Binary Search) For each row
- * do a binary search to find the leftmost one on that row and update the
- * answer. Hide Hint #2 2. (Optimal Approach) Imagine there is a pointer p(x, y)
- * starting from top right corner. p can only move left or down. If the value at
- * p is 0, move down. If the value at p is 1, move left. Try to figure out the
- * correctness and time complexity of this algorithm.
+ * <li>1 <= mat.length, mat[i].length <= 100 mat[i][j] is either 0 or 1. mat[i]
+ * is sorted in a non-decreasing way.</li>
+ * <li>Hint #1 1. (Binary Search) For each row do a binary search to find the
+ * leftmost one on that row and update the answer.</li>
+ * <li>Hint #2 2. (Optimal Approach) Imagine there is a pointer p(x, y) starting
+ * from top right corner. p can only move left or down. If the value at p is 0,
+ * move down. If the value at p is 1, move left.</li>
+ * <p>
+ * Try to figure out the correctness and time complexity of this algorithm.
+ * </p>
  * </p>
  * </p>
  * 
