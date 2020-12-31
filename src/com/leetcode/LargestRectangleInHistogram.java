@@ -11,7 +11,6 @@ package com.leetcode;
 public class LargestRectangleInHistogram {
 
 	public static void main(String[] args) {
-
 		System.out.println(largestRectangleArea(new int[] { 2, 1, 5, 6, 2, 3 }));// 10
 		System.out.println(largestRectangleArea(new int[] { 2, 1, 2 }));// 3
 		System.out.println(largestRectangleArea(new int[] { 0, 9 }));// 9
