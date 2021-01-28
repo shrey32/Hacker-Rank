@@ -1,9 +1,6 @@
 package com.leetcode;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -21,14 +18,14 @@ public class SmallestStringWithAGivenNumericValue {
 
 	public static String getSmallestString(int n, int k) {
 		Map<Integer, String> map = getLookup();
-		List<Integer> list = new ArrayList<>();
 		int high = 26;
 		int curr = n;
 
-		while (list.size() < n) {
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < n) {
 			int rem = k - high;
 			if (rem >= curr - 1) {
-				list.add(high);
+				sb = new StringBuilder(map.get(high)).append(sb);
 				curr--;
 				k = rem;
 			} else {
@@ -36,11 +33,6 @@ public class SmallestStringWithAGivenNumericValue {
 			}
 		}
 
-		Collections.reverse(list);
-		StringBuilder sb = new StringBuilder();
-		for (int i : list) {
-			sb.append(map.get(i));
-		}
 		return sb.toString();
 	}
 
