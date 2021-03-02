@@ -16,9 +16,7 @@ public class SetMismatch {
 	public static int[] findErrorNums(int[] nums) {
 
 		int n = nums.length;
-		int totalSum = 0;
-		for (int i = 1; i <= n; i++)
-			totalSum += i;
+		int totalSum = n * (n + 1) / 2;
 
 		Arrays.sort(nums);
 		int sum = nums[0];
