@@ -7,7 +7,11 @@ package com.leetcode;
  */
 public class PowerOf2 {
 
-	public double myPow(double x, int n) {
+	public static void main(String[] args) {
+		System.out.println(myPow(2, 10));
+	}
+
+	public static double myPow(double x, int n) {
 		double res = 1;
 		double curr = x;
 		for (long i = Math.abs((long) n); i > 0; i = i / 2) {
