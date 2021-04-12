@@ -10,6 +10,7 @@ public class PartitionList {
 	public static void main(String[] args) {
 		System.out.println(partition(input1(), 3));
 		System.out.println(partition(input2(), 2));
+		System.out.println(partition(input3(), 5));
 	}
 
 	public static ListNode partition(ListNode head, int x) {
@@ -63,6 +64,17 @@ public class PartitionList {
 	private static ListNode input2() {
 		ListNode head = new ListNode(1);
 		head.next = new ListNode(2);
+		return head;
+	}
+
+	private static ListNode input3() {
+		ListNode head = new ListNode(3);
+		head.next = new ListNode(5);
+		head.next.next = new ListNode(8);
+		head.next.next.next = new ListNode(5);
+		head.next.next.next.next = new ListNode(10);
+		head.next.next.next.next.next = new ListNode(2);
+		head.next.next.next.next.next.next = new ListNode(1);
 		return head;
 	}
 
