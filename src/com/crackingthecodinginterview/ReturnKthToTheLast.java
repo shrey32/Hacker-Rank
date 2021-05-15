@@ -28,7 +28,7 @@ public class ReturnKthToTheLast {
 			return null;
 		else if (list.size() == k)
 			head = head.next;
-		else
+		else if (list.get(kth).next != null)
 			list.get(kth).next = list.get(kth).next.next;
 
 		return head;
