@@ -8,6 +8,7 @@ public class RemoveDuplicatesFromUnsortedLinkedList {
 	public static void main(String[] args) {
 		System.out.println(removeDuplicates(input1()));
 		System.out.println(removeDuplicates(input2()));
+		System.out.println(removeDuplicatesUnsorted(input3()));
 	}
 
 	public static ListNode removeDuplicates(ListNode head) {
@@ -31,6 +32,27 @@ public class RemoveDuplicatesFromUnsortedLinkedList {
 		return head;
 	}
 
+	public static ListNode removeDuplicatesUnsorted(ListNode head) {
+		ListNode temp = head;
+		while (temp != null) {
+			ListNode temp1 = temp;
+			while (temp1 != null && temp1.next != null) {
+				if (temp.val == temp1.next.val) {
+					if (temp1.next.next != null) {
+						temp1.next.val = temp1.next.next.val;
+						temp1.next = temp1.next.next;
+						continue;
+					} else {
+						temp1.next = null;
+					}
+				}
+				temp1 = temp1.next;
+			}
+			temp = temp.next;
+		}
+		return head;
+	}
+
 	private static ListNode input1() {
 		ListNode head = new ListNode(1);
 		head.next = new ListNode(2);
@@ -39,6 +61,17 @@ public class RemoveDuplicatesFromUnsortedLinkedList {
 		head.next.next.next.next = new ListNode(5);
 		head.next.next.next.next.next = new ListNode(4);
 		head.next.next.next.next.next.next = new ListNode(4);
+		return head;
+	}
+
+	private static ListNode input3() {
+		ListNode head = new ListNode(10);
+		head.next = new ListNode(12);
+		head.next.next = new ListNode(11);
+		head.next.next.next = new ListNode(11);
+		head.next.next.next.next = new ListNode(12);
+		head.next.next.next.next.next = new ListNode(10);
+		head.next.next.next.next.next.next = new ListNode(13);
 		return head;
 	}
 
