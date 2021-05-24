@@ -16,6 +16,8 @@ public class DiagonalMatrix {
 		diagonalMatrix(mat);
 		mat = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 10, 11, 12 }, { 13, 14, 15 } };
 		diagonalMatrix(mat);
+		mat = new int[][] { { 1, 2 }, { 3, 4 } };
+		diagonalMatrix(mat);
 	}
 
 	private static void diagonalMatrix(int[][] mat) {
@@ -26,7 +28,7 @@ public class DiagonalMatrix {
 		while (k < m * n) {
 			int tempi = i;
 			int tempj = j;
-			while (tempi >= 0 && tempi < m && tempj >= 0 && tempj < n) {
+			while (tempi < m && tempj >= 0) {
 				System.out.print(mat[tempi][tempj] + " ");
 				tempi++;
 				tempj--;
